@@ -28,15 +28,15 @@ materialAdmin.controller('TodoController', ['$scope', function($scope) {
     $scope.tasks = getincompleteTasks;
  
  // //page load
- //    this.Load = function (event) {
+    this.Load = function (event) {
 
- //        var value_or_null = (document.cookie.match(/^(?:.*;)?LinkedRetail=([^;]+)(?:.*)?$/) || [, null])[1]
+        var value_or_null = (document.cookie.match(/^(?:.*;)?LinkedRetail=([^;]+)(?:.*)?$/) || [, null])[1]
 
- //        if (value_or_null == null) 
- //        {
- //            location.href = 'login.html';
- //        }
- //    }
+        if (value_or_null == null) 
+        {
+            location.href = 'login.html';
+        }
+    }
  
     // Array of selected attributeset
     var getcompletdTasks = [];
