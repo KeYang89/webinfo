@@ -42,19 +42,19 @@ materialAdmin
         };
 
 
-        //page load
-        this.Load = function (event) {
+        // //page load
+        // this.Load = function (event) {
 
-            var value_or_null = (document.cookie.match(/^(?:.*;)?LinkedRetail=([^;]+)(?:.*)?$/) || [, null])[1]
+        //     var value_or_null = (document.cookie.match(/^(?:.*;)?LinkedRetail=([^;]+)(?:.*)?$/) || [, null])[1]
 
-            if (value_or_null == null) //|| document.Cookie == '')
-            {
-                location.href = 'login.html';
-            }
-            else {
-            }
+        //     if (value_or_null == null) //|| document.Cookie == '')
+        //     {
+        //         location.href = 'login.html';
+        //     }
+        //     else {
+        //     }
 
-        }
+        // }
 
         this.lockScreen = function (event) {
             alert('insoide lock screen');

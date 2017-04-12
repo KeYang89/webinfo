@@ -32,16 +32,16 @@
         });
     }
 
-     //page load
-    this.Load = function (event) {
+    //  //page load
+    // this.Load = function (event) {
 
-        var value_or_null = (document.cookie.match(/^(?:.*;)?LinkedRetail=([^;]+)(?:.*)?$/) || [, null])[1]
+    //     var value_or_null = (document.cookie.match(/^(?:.*;)?LinkedRetail=([^;]+)(?:.*)?$/) || [, null])[1]
 
-        if (value_or_null == null) 
-        {
-            location.href = 'login.html';
-        }
-    }
+    //     if (value_or_null == null) 
+    //     {
+    //         location.href = 'login.html';
+    //     }
+    // }
     // Array of Completed Tasks
     var getcompletdTasks = [];
     var srvcompletedTasksData = {};

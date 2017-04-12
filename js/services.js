@@ -92,9 +92,9 @@ materialAdmin
         var srvData = {};
 
         $.ajax({
-            //url: "services/WebInfoDataService.svc/GetProducts/json/1",
+            url: "services/WebInfoDataService.svc/GetProducts/json/1",
             //url: "http://localhost/angular/services/WebInfoDataService.svc/GetProducts/json/1",
-			url: "services/GetProducts.php",
+			//url: "services/GetProducts.php",
             type: 'GET',
             async: false,
 			cache: false,
@@ -117,8 +117,8 @@ materialAdmin
     var srvData = {};
 
     $.ajax({
-        //url: "services/WebInfoDataService.svc/services/WebInfoDataService.svc/GetTasks/json",
-		url: "services/GetTask.php/1",
+        url: "services/WebInfoDataService.svc/services/WebInfoDataService.svc/GetTasks/json",
+		//url: "services/GetTask.php/1",
         type: 'GET',
         async: false,
         dataType: "json",
