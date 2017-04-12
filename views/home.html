@@ -1,0 +1,126 @@
+<header id="header" data-current-skin={{mactrl.currentSkin}} data-ng-include="'template/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+    <aside id="sidebar" data-ng-include="'template/sidebar-left.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }"></aside>
+
+    <aside id="chat" data-ng-include="'template/chat.html'" data-ng-class="{ 'toggled': mactrl.sidebarToggle.right === true }"></aside>
+
+    <section id="content">
+
+    <div class="container">
+            <div class="block-header">
+                <h2>Intergration</h2>
+            </div>
+    <div class="card">
+        <!-- mainboard list start -->
+        <div class="listview lv-bordered lv-lg">
+            <div class="lv-header-alt clearfix">
+                <h2 class="lvh-label hidden-xs">Select Your Intergration</h2>
+
+                <div class="lvh-search" data-ng-if="mactrl.listviewSearchStat" data-ng-click="mactrl.listviewSearchStat">
+                    <input type="text" placeholder="Start typing..." class="lvhs-input">
+
+                    <i class="lvh-search-close" data-ng-click="mactrl.listviewSearchStat = false">&times;</i>
+                </div>
+
+                <ul class="lv-actions actions">
+                    <li>
+                        <a href="" data-ng-click="mactrl.listviewSearchStat = true">
+                            <i class="zmdi zmdi-search"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="zmdi zmdi-info"></i>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="lv-body"  data-ng-controller="animCtrl as actrl">
+                <div class="lv-item media">
+                    <div class="checkbox pull-left">
+                        <label>
+                            <input type="checkbox" value="" ng-click="magento_integration=true;actrl.setAnimation('bounce', 'attentionSeekerMagento')">
+                            <i class="input-helper"></i>
+                        </label>
+                    </div>
+                    <div class="pull-left">
+                        <img class="lv-img-sm" src="img/profile-pics/magento.png" alt="">
+                    </div>
+                    <div class="media-body">
+                        <div class="lv-title">Click to set up your Magento site</div>
+                         <a href="?#/widgets/mapping-attributes"><button class="btn btn-default btn-icon-text waves-effect btn-success animated btn-map" id="attentionSeekerMagento"><i class="zmdi zmdi-arrow-forward"></i> Start Mapping</button></a>
+                    </div>
+                </div>
+                <div class="lv-item media">
+                    <div class="checkbox pull-left">
+                        <label> 
+                            <input type="checkbox" value="" ng-click="woo_integration=true;actrl.setAnimation('bounce', 'attentionSeekerWoocommerce')">
+                            <i class="input-helper"></i>
+                        </label>
+                    </div>
+                    <div class="pull-left">
+                        <img class="lv-img-sm" src="img/profile-pics/woocommerce.png" alt="">
+                    </div>
+                    <div class="media-body">
+                        <div class="lv-title">Click to set up your Woocommerce site</div>
+                         <a href="?#/widgets/mapping-attributes"><button class="btn btn-default btn-icon-text waves-effect btn-success animated btn-map" id="attentionSeekerWoocommerce"><i class="zmdi zmdi-arrow-forward"></i> Start Mapping</button></a>     
+                    </div>
+                </div>
+                <div class="lv-item media">
+                    <div class="checkbox pull-left">
+                        <label>
+                            <input type="checkbox" value="" ng-click="amazon_integration=true;actrl.setAnimation('bounce', 'attentionSeekerAmazon')">
+                            <i class="input-helper"></i>
+                        </label>
+                    </div>
+                    <div class="pull-left">
+                        <img class="lv-img-sm" src="img/profile-pics/amazon.png" alt="">
+                    </div>
+                    <div class="media-body">
+                        <div class="lv-title">Click to Integrate with Amazon</div>
+                        <small class="lv-small">To be eligible to sell on Amazon Sellers must have at least one of the following: </small>
+                        <small class="lv-small">a non-individual Selling on Amazon Account, an Amazon WebStore Account, a Checkout by Amazon Account, or an Amazon Product Ads Account.</small>
+
+                        <ul class="lv-attrs">
+                            <li>Merchant ID</li>
+                            <li>MWS Auth Token</li>
+                            <li>Title</li>
+                        </ul>
+                         <a href="?#/widgets/mapping-attributes"><button class="btn btn-default btn-icon-text waves-effect btn-success animated btn-map" id="attentionSeekerAmazon"><i class="zmdi zmdi-arrow-forward"></i> Start Mapping</button></a>
+                    </div>
+                </div>
+                                <div class="lv-item media"  data-ng-controller="animCtrl as actrl">
+                    <div class="checkbox pull-left">
+                        <label>
+                            <input type="checkbox" value="" ng-click="ebay_integration=true;actrl.setAnimation('bounce', 'attentionSeekerEbay')">
+                            <i class="input-helper"></i>
+                        </label>
+                    </div>
+                    <div class="pull-left">
+                        <img class="lv-img-sm" src="img/profile-pics/ebay.png" alt="">
+                    </div>
+                    <div class="media-body">
+                        <div class="lv-title">Click to Integrate with Ebay</div>
+                       <ul class="lv-attrs">
+                            <li>eBay User ID</li>
+                            <li>Get Token</li>
+                            <li>Title</li>
+                        </ul>
+                        <button class="btn btn-default btn-icon-text waves-effect btn-success animated btn-map" id="attentionSeekerEbay"><i class="zmdi zmdi-arrow-forward"></i> Start Mapping</button>
+                    </div>
+                </div>
+        </div>
+        <!-- end of body -->
+    <div class="lv-footer col-xs-12">
+     <a href="?#/widgets/mapping-attributes"><button class="btn bgm-lightblue waves-effect"><div class="next-btn">Next</div></button></a>
+    </div>
+            </div>   </div>  </div>  
+   <!-- mainboard list end -->          
+    </section>
+</section>
+
+<footer id="footer" data-ng-include="'template/footer.html'"></footer>
+<script>

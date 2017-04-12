@@ -1,0 +1,119 @@
+
+
+<div class="container" data-ng-controller="tableCtrl as tctrl" data-ng-init="mactrl.Load($event)">
+
+    <div class="block-header">
+        <h2>Product Data<small>Allow sorting, filtering and editing</small></h2>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Column Sorting <small>Click on columns header to sort the table.</small></h2>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <!--<button id="export" class = "export" ng-click="tctrl.export()" data-export="export">Export</button>-->
+                <a class="btn btn-primary" ng-click="tctrl.export()" download="data.csv">Export to CSV</a>
+
+                <table id="table1" ng-table="tctrl.tableSorting" class="table table-striped table-vmiddle expcsv">
+                    <tr ng-repeat="w in $data">
+                        <td data-title="'ID'" sortable="'id'">
+							{{ w.id }}
+                        </td>
+                        <td data-title="'Name'" sortable="'name'">
+						<!-- Begin Vishruthi 12/17/2016 Duplicate product -->
+                             <a href="?#/widgets/add-products-magento" ng-click="tctrl.product(w.id)">
+                                {{ w.name }}
+                             </a>
+					    <!-- End Vishruthi 12/17/2016 Duplicate product -->
+                        </td>
+                        <td data-title="'WebSku'" sortable="'websku'">
+                            {{ w.websku }}
+                        </td>
+                        <td data-title="'Item Number'" sortable="'itemnumber'">
+                            {{ w.itemnumber }}
+                        </td>
+                        <td data-title="'Price'" sortable="'price'">
+                            {{ w.price }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Column Filtering <small>Type something in filter and press Enter or Filter button</small></h2>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table ng-table="tctrl.tableFilter" class="table table-striped table-vmiddle" show-filter="true">
+                    <tr ng-repeat="w in $data">
+                        <td data-title="'ID'" sortable="'id'">
+                            {{ w.id }}
+                        </td>
+                        <td data-title="'Name'" sortable="'name'">
+                            {{ w.name }}
+                        </td>
+                        <td data-title="'WebSku'" sortable="'websku'">
+                            {{ w.websku }}
+                        </td>
+                        <td data-title="'Item Number'" sortable="'itemnumber'">
+                            {{ w.itemnumber }}
+                        </td>
+                        <td data-title="'Price'" sortable="'price'">
+                            {{ w.price }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Editable <small>Click on Pencil icon to edit a row.</small></h2>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table ng-table="tctrl.tableEdit" class="table table-striped table-vmiddle">
+                    <tr ng-repeat="w in $data" ng-class="{ 'active': w.$edit }">
+                        <td data-title="'ID'">
+                            <span ng-if="!w.$edit">{{ w.id }}</span>
+                            <div ng-if="w.$edit"><input class="form-control" type="text" ng-model="w.id" /></div>
+                        </td>
+                        <td data-title="'Name'">
+                            <span ng-if="!w.$edit">
+							<!-- Begin Vishruthi 12/17/2016 Duplicate product -->
+							<a href="?#/widgets/add-products-magento" ng-click="tctrl.product(w.id)">{{ w.name }}</a>
+							<!-- End Vishruthi 12/17/2016 Duplicate product -->
+							</span>
+                            <div ng-if="w.$edit"><input class="form-control" type="text" ng-model="w.name" /></div>
+                        </td>
+                        <td data-title="'WebSku'">
+                            <span ng-if="!w.$edit">{{ w.websku }}</span>
+                            <div ng-if="w.$edit"><input class="form-control" type="text" ng-model="w.websku" /></div>
+                        </td>
+                        <td data-title="'Item Number'">
+                            <span ng-if="!w.$edit"> {{ w.itemnumber }}</span>
+                            <div ng-if="w.$edit"><input class="form-control" type="text" ng-model="w.itemnumber" /></div>
+                        </td>
+                        <td data-title="'Price'">
+                            <span ng-if="!w.$edit">  {{ w.price }}</span>
+                            <div ng-if="w.$edit"><input class="form-control" type="text" ng-model="w.price" /></div>
+                        </td>
+                        <td data-title="'Actions'">
+                            <button type="button" class="btn btn-default" ng-if="!w.$edit" ng-click="w.$edit = true"><i class="zmdi zmdi-edit"></i></button>
+                            <button type="button" class="btn btn-success" ng-if="w.$edit" ng-click="w.$edit = false"><i class="zmdi zmdi-check"></i></button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

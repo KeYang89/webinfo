@@ -1,0 +1,90 @@
+<div class="container" data-ng-init="mactrl.Load($event)">
+    <div ng-controller="TodoController">
+    <div class="listview lv-bordered lv-lg card">
+          <div class="lv-header-alt clearfix">
+                <h2 class="lvh-label hidden-xs">1. Add Your Attribute Sets</h2>
+            <div class="lv-actions actions">
+                    <span>{{ tasksComplete.length }} Attribute Sets selected. {{ taskLength() }} Attribute Sets in total. </span>
+            </div>
+          </div>
+        <div class="lv-body">
+          <div class="lv-item media add-attri">
+            <form name="addTask" ng-submit="createTask()" novalidate>
+              <div class="form-group fg-line col-lg-9 col-sm-8 col-xs-12">
+              <input class="form-control pull-left" type="text" ng-model="newTitle" placeholder="Hit Enter to Add Attribute Set..." ng-required/>
+              </div>
+                <button class="btn btn-green pull-right" type="submit" ng-disabled="addTask.$invalid">Add Attribute Set</button>
+            </form>
+          </div>
+          <div class="lv-item"  ng-repeat="task in tasks">
+            <span>{{task.title}}</span>
+            <div class="pull-right">
+              <a href ng-click="removeTask($index)" uib-tooltip="delete" class="data-swal-basic">
+               <i class="zmdi zmdi-delete zmdi-hc-fw"></i>
+              </a>
+              <a href ng-click="completeTask($index)" uib-tooltip="select">
+                 <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
+              </a>
+            </div>
+          </div>
+          <div class="lv-item" ng-class="{ 'status status--done' : task.complete }" title="task.attrsetid"  ng-repeat="task in tasksComplete">
+            <span>{{task.title}}</span>
+            <div class="pull-right" uib-tooltip="unselect">
+              <a href ng-click="uncompleteTask($index)">
+               <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
+              </a>
+            </div>
+          </div></div></div>
+          
+          <div class="card">
+              <div class="lv-header-alt clearfix">
+                <h2 class="lvh-label hidden-xs">2. Add or Remove Dropdown Attributes to the Selected Attribute Sets</h2>
+                <div class="lv-actions actions">
+                    <span>These Dropdown Attributes require you to enter options in step 3.</span>
+                </div>
+              </div>
+
+          <div class="card-body card-padding">
+            <div class="row" ng-class="{ task.complete }" ng-repeat="task in tasksComplete" style="min-height:60px;margin:0px !important;">
+             <span class="pull-left col-lg-2" uib-tooltip="Attribute Set Name" style="padding:5px;font-size:13px;">{{task.title}}</span>
+                <div class="pull-right col-lg-10 col-md-11 col-xs-12" uib-tooltip="Add Dropdown Attributes"><tags-input ng-model="tags[task.id+1].sets" placeholder="Hit Enter to Add Attributes..." display-property="text" min-length="1"></tags-input></div>
+           <!-- tags[task.id].sets-->
+              <!--<div class="pull-right col-lg-10 col-md-11 col-xs-12" uib-tooltip="Add Dropdown Attributes"><tags-input ng-model="getTagsValue(task.id)" placeholder="Hit Enter to Add Attributes..." display-property="text" min-length="1"></tags-input></div>-->
+        </div>
+                  </div> 
+        </div> 
+        <div class="card">
+         <div class="lv-header-alt clearfix">
+                <h2 class="lvh-label hidden-xs">3. Add or Remove Options to the Dropdown Attributes</h2>
+                <div class="lv-actions actions">
+                    <span>All options will appear as dropdowns in the product editing page.</span>
+                </div>
+          </div>
+          <div class="card-body card-padding">
+            <div class="row" ng-repeat="tag in tags[0].sets" style="min-height:60px;margin:0px !important;">
+             <span class="pull-left col-lg-2" uib-tooltip="Attribute Set Name" style="padding:5px;font-size:13px;">{{tag.text}}</span>
+             <div class="pull-right col-lg-10 col-md-11 col-xs-12" uib-tooltip="Add Dropdown Attribute Options">  <tags-input ng-model="tag.options" placeholder="Hit Enter to Add Options..." display-property="text" min-length="1"></tags-input></div>
+           </div>
+         </div>             
+      </div> 
+        <div class="card">
+              <div class="lv-header-alt clearfix">
+                <h2 class="lvh-label hidden-xs">4. Add Input Attributes to the Selected Attribute Sets</h2>
+                <div class="lv-actions actions">
+                    <span>All field will appear as input field in the product editing page.</span>
+                </div>
+          </div>
+          <div class="card-body card-padding">
+            <div class="row" ng-class="{ task.complete }" ng-repeat="task in tasksComplete" style="min-height:60px;margin:0px !important;">
+             <span class="pull-left col-lg-2" uib-tooltip="Attribute Set Name" style="padding:5px;font-size:13px;">{{task.title}}</span>
+             <div class="pull-right col-lg-10 col-md-11 col-xs-12" uib-tooltip="Add Attribute Input"><tags-input ng-model="tagsinput[task.id + 1].sets" placeholder="Hit Enter to Add Attributes..." display-property="text" min-length="1"></tags-input></div>
+              <!--  <div class="pull-right col-lg-10 col-md-11 col-xs-12" uib-tooltip="Add Attribute Input"><tags-input ng-model="getTagsInputValue(task.attrsetid)" placeholder="Hit Enter to Add Attributes..." display-property="text" min-length="1"></tags-input></div>-->
+           </div>
+         </div>            
+      </div> 
+        <div class="lv-footer">
+            <a class="btn bgm-lightblue waves-effect" href="?#/widgets/mapping-categories"><div class="next-btn" ng-click="savePageValues()">Next</div></a>
+        </div>
+  </div>
+  
+  </div>

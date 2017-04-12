@@ -1,0 +1,335 @@
+<div class="container" data-ng-init="mactrl.Load($event)">
+    <div ng-controller="addProductController">
+        <div class="card">
+            <div class="lv-header-alt clearfix">
+                <h2 class="lvh-label hidden-xs">6. Add Item to Your Magento Website</h2>
+                <div class="lv-actions actions">
+                    <button class="btn btn-default waves-effect pull-left">Import Your Item</button>
+                </div>
+            </div>
+            <div class="card-body card-padding">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group" id="product-info">
+                            <p class="c-black f-500 m-b-5">Product Info</p>
+                            <div class="fg-line">
+                                <textarea class="form-control" data-auto-size="" ng-model="product.name" placeholder="Product Name" data-autosize-on="true" style="overflow: hidden; word-wrap: break-word; height: 35px;" tooltip="Product Name"></textarea>
+                            </div>
+                            <div class="fg-line m-t-15">
+                                <summernote height="150" placeholder="Product Short Description" onchange="GetTextAreaValue(product.shortdesc);" ng-model="product.shortdesc" tooltip="Product Short Description">{{product.shortdesc}}</summernote>
+                            </div>
+                            <div class="fg-line m-t-15">
+                                <summernote height="300" placeholder="Product Long Description" onchange ="GetTextAreaValue(product.longdesc);"  ng-model="product.longdesc" tooltip="Product Long Description">{{product.longdesc}}</summernote>
+                            </div>
+                        </div>
+                        <div class="form-group" id="seo-info">
+                            <p class="c-black f-500 m-b-5">SEO Info</p>
+                            <div class="fg-line">
+                                <textarea class="form-control" data-auto-size="" placeholder="Meta Title" ng-model="product.metatitle"  data-autosize-on="true" style="overflow: hidden; word-wrap: break-word; height: 35px;" tooltip="Meta Title"></textarea>
+                            </div>
+                            <div class="fg-line">
+                                <textarea class="form-control" data-auto-size="" placeholder="Meta Keywords" ng-model="product.metakeywords"  data-autosize-on="true" style="overflow: hidden; word-wrap: break-word; height: 35px;" tooltip="Meta Keywords"></textarea>
+                            </div>
+                            <div class="fg-line">
+                                <textarea class="form-control" data-auto-size="" placeholder="Meta Description (max: 255 words)" ng-model="product.metadesc" data-autosize-on="true" style="overflow: hidden; word-wrap: break-word; height: 125px;" tooltip="Meta Description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group" id="price-group">
+                            <p class="c-black f-500 m-b-5">Price</p>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="zmdi zmdi-money"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control"  ng-model="product.originalprice"  placeholder="Original Price">
+                                </div>
+
+                                <span class="input-group-addon"><i class="zmdi zmdi-money"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control"  ng-model="product.specialprice" placeholder="Special Price">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="inventory-group">
+                            <p class="c-black f-500 m-b-5 m-t-15">Inventory</p>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="zmdi zmdi-assignment-check"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control" ng-model="product.sku" placeholder="SKU">
+                                </div>
+
+                                <span class="input-group-addon"><i class="zmdi zmdi-assignment"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control" ng-model="product.quantity" placeholder="Qty">
+                                </div>
+                            </div>
+                            <div class="toggle-switch lv-item" data-ts-color="red">
+                                <label for="inv" class="ts-label">{{product.invModel}} Track Inventory</label>
+                                <input id="inv" type="checkbox" hidden="hidden" ng-model="product.invModel"  ng-true-value="'Do not'" ng-false-value="''">
+                                <label for="inv" class="ts-helper"></label>
+                            </div>
+                            <div class="toggle-switch lv-item" data-ts-color="blue">
+                                <label for="bako" class="ts-label">Turn on Backorders</label>
+                                <input id="bako" type="checkbox" hidden="hidden" ng-model="backorderModel" ng-true-value="hidden" ng-click="backOrderMessage = !backOrderMessage">
+                                <label for="bako" class="ts-helper"></label>
+                            </div>
+                            <div class="input-group" ng-show="backOrderMessage" id="backOrderMessage">
+                                <span class="input-group-addon"><i class="zmdi zmdi-assignment-alert"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control {{backorderModel}}" ng-model="product.backordermsg" placeholder="Backorder Message">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="input-attributes">
+                            <p class="c-black f-500 m-b-5 m-t-15">Input Attributes</p>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="zmdi zmdi-more"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control" ng-model="product.websku" placeholder="WebSku">
+                                </div>
+
+                                <span class="input-group-addon"><i class="zmdi zmdi-more"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control"  ng-model="product.tags" placeholder="Tags">
+                                </div>
+                                <span class="input-group-addon"><i class="zmdi zmdi-`more"></i></span>
+                                <div class="fg-line">
+                                    <input type="text" class="form-control" ng-model="product.upc" placeholder="UPC">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="input-group p-b-15">
+                            <div class="lv-item">
+                                <label for="singleSelect"> Select the Attribute Set: </label><br>
+                                <div class="row">
+                                    <span class="pull-left col-lg-2">Label</span>
+                                    <div class="pull-right">
+                                        <select class="catselect" ng-change="GetAttributes(product.attributeset)" data-placeholder="Select attribute sets.." ng-model="product.attributeset">
+                                            <!--<option value="Default">Default</option>-->
+                                            <option ng-repeat="task in tasksComplete" value="{{task.title}}" ng-model="taskid">{{task.title}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lv-item">
+                                <label> Select the Attributes: </label><br>
+                                <div class="row sideline" ng-repeat="tag in tags[0].sets">
+                                    <span class="pull-left col-lg-2">{{tag.text}}</span>
+                                    <div class="pull-right"><select ng-change="GetValue(tag.text, selAttr)" ng-model="selAttr" class="catselect"><option ng-repeat="option in tag.options" value="{{option.text}}">{{option.text}}</option></select></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lv-item" ng-controller="TreeController" class="p-b-15">
+                            <label for="singleSelect"> Select the Categories: </label><br>
+                            <div class="media-body">
+                                <div ya-tree="child in data.children at ul" class="bg{{$depth%6}}" ng-class="{minimized:child.minimized}">
+                                    <label class="checkbox checkbox-inline m-r-20">
+                                        <input type="checkbox" ng-model="selectedcat" ng-checked="exists(child.categoryid, selected)" ng-click="toggle(child.categoryid,selected)">
+                                        <i class="input-helper"></i>
+                                        <span>{{child.title}}</span><br><span>{{isChecked}}</span>
+                                        <ul ng-class="{pregnant:child.children.length}" style="padding-left: 0px;"></ul>
+                                    </label>
+                                </div><span class="selCats">{{selected|json}}</span>
+                            </div>
+                        </div> 
+
+                        <div class="toggle-switch lv-item" data-ts-color="red">
+                            <!--N V Start--><!--<label for="dis" class="ts-label">Disable For Now</label><br>-->
+                            <label for="dis" class="ts-label">Web Enabled</label><br><!--N V End-->
+                            <input id="dis" type="checkbox" hidden="hidden">
+                            <label for="dis" class="ts-helper"></label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Pick a date <small>Set up date range for sales/news</small></h2>
+            </div>
+
+            <div class="card-body card-padding p-t-0" data-ng-controller="DatepickerDemoCtrl">
+                <div class="row">
+                    <div class="col-sm-3">
+
+                        <div class="date-picker input-group" ng-class="{ 'is-opened': opened == true }">
+                            <span class="input-group-addon"><i class="zmdi zmdi-calendar ma-icon"></i></span>
+                            <div class="fg-line" ng-class="{ 'fg-toggled': opened == true }">
+                                <input ng-click="open($event, 'opened')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="product.salesfromdt" is-open="opened" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="Select Sales from Date" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-3">
+
+                        <div class="date-picker input-group dp-blue" ng-class="{ 'is-opened': opened2 == true }">
+                            <span class="input-group-addon"><i class="zmdi zmdi-calendar ma-icon"></i></span>
+                            <div class="fg-line" ng-class="{ 'fg-toggled': opened2 == true }">
+                                <input ng-click="open($event, 'opened2')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="product.salestodt" is-open="opened2" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="Select Sales to Date" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-3">
+
+                        <div class="date-picker input-group dp-red" ng-class="{ 'is-opened': opened3 == true }">
+                            <span class="input-group-addon"><i class="zmdi zmdi-calendar ma-icon"></i></span>
+                            <div class="fg-line" ng-class="{ 'fg-toggled': opened3 == true }">
+                                <input ng-click="open($event, 'opened3')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="product.salesnewsfromdt" is-open="opened3" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="Select News from Date" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-3">
+
+                        <div class="date-picker input-group dp-cyan" ng-class="{ 'is-opened': opened4 == true }">
+                            <span class="input-group-addon"><i class="zmdi zmdi-calendar ma-icon"></i></span>
+                            <div class="fg-line" ng-class="{ 'fg-toggled': opened4 == true }">
+                                <input ng-click="open($event, 'opened4')" type="text" class="form-control" uib-datepicker-popup="{{format}}" show-weeks="false" ng-model="product.salesnewstodt" is-open="opened4" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" placeholder="Select News to Date" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div> 
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Image Uploading</h2>
+            </div>
+
+            <div class="card-body card-padding">
+                <div ng-controller="ModalDemoCtrl" class="row">
+                    <script type="text/ng-template" id="myModalContent.html">
+                        <iframe src="/LRWebInfo/vendors/fileupload/" width="800" height="600">
+                    </script>
+                    <div class="col-sm-3 p-b-15">
+                        <button type="button" class="btn btn-primary waves-effect" ng-click="open()">Product Images</button>
+                    </div>
+                    <div class="col-sm-9 p-b-15">
+                        <div class="fg-line">
+                            <input type="text" class="form-control" ng-model="product.productimagealt" placeholder="Image Alt for Product Images">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-primary waves-effect" ng-click="open()">Brand Logos</button>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="fg-line">
+                            <input type="text" class="form-control" ng-model="product.brandimagealt" placeholder="Image Alt for Brand Logos">
+                        </div>
+                    </div>
+                     <div class="col-sm-12 p-b-15">
+                        <a class="btn bgm-green waves-effect"  id="getImageResult">Product Images Results</a>
+                        <span id="imageResult"></span>
+                    </div>
+					 <!-- <div class="col-sm-12 p-b-15">
+                        <a class="btn bgm-green waves-effect"  id="getLogoResult">Brand Logos Results</a>
+                        <span id="imageResults"></span>
+                    </div> -->
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Product Colors <small>Select Your Product Colors, or enter the color directly (e.g red)</small></h2>
+            </div>
+
+            <div class="card-body card-padding" data-ng-controller="formCtrl as fctrl">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="cp-container">
+                            <div class="input-group form-group">
+                                <span class="input-group-addon"><i class="zmdi zmdi-invert-colors"></i></span>
+                                <div class="fg-line dropdown" uib-dropdown>
+                                    <input type="text" class="form-control cp-value color1" ng-model="fctrl.color" uib-dropdown-toggle>
+
+                                    <div class="dropdown-menu">
+                                        <ng-farbtastic ng-model="fctrl.color"></ng-farbtastic>
+                                    </div>
+
+                                    <i class="cp-value" style="background-color: {{ fctrl.color }}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="cp-container">
+                            <div class="input-group form-group">
+                                <span class="input-group-addon"><i class="zmdi zmdi-invert-colors"></i></span>
+                                <div class="fg-line dropdown" uib-dropdown>
+                                    <input type="text" class="form-control cp-value color2" ng-model="fctrl.color2" uib-dropdown-toggle>  
+
+                                    <div class="dropdown-menu">
+                                        <ng-farbtastic ng-model="fctrl.color2"></ng-farbtastic>
+                                    </div>
+
+                                    <i class="cp-value" style="background-color: {{ fctrl.color2 }}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="cp-container">
+                            <div class="input-group form-group">
+                                <span class="input-group-addon"><i class="zmdi zmdi-invert-colors"></i></span>
+                                <div class="fg-line dropdown" uib-dropdown>
+                                    <input type="text" class="form-control cp-value color3" ng-model="fctrl.color3" uib-dropdown-toggle>
+
+                                    <div class="dropdown-menu">
+                                        <ng-farbtastic ng-model="fctrl.color3"></ng-farbtastic>
+                                    </div>
+
+                                    <i class="cp-value" style="background-color: {{ fctrl.color3 }}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="cp-container">
+                            <div class="input-group form-group">
+                                <span class="input-group-addon"><i class="zmdi zmdi-invert-colors"></i></span>
+                                <div class="fg-line dropdown" uib-dropdown>
+                                    <input type="text" class="form-control cp-value color4" ng-model="fctrl.color4" uib-dropdown-toggle>
+
+                                    <div class="dropdown-menu">
+                                        <ng-farbtastic ng-model="fctrl.color4"></ng-farbtastic>
+                                    </div>
+
+                                    <i class="cp-value" style="background-color: {{ fctrl.color4 }}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                </div>
+            </div>
+        </div>
+
+        <div class="lv-footer">
+            <a class="btn bgm-green waves-effect" href="?#/widgets/add-products-magento#add-product-title" tooltip="product saved"><div class="next-btn" ng-click="saveProduct()">Add more products</div></a>
+            <a class="btn bgm-lightblue waves-effect" href="?#/tables/data-table"><div class="next-btn" ng-click="saveProduct()">Save & go to list</div></a>
+        </div>
+		<!-- Begin Vishruthi 12/17/2016 Duplicate product -->
+		<div class="lv-footer">
+            <a class="btn bgm-green waves-effect" href="?#/widgets/add-products-magento#add-product-title" tooltip="product saved"><div class="next-btn" ng-click="dupProduct()">Re-Insert product</div></a>
+        </div>
+		<!-- End Vishruthi 12/17/2016 Duplicate product -->
+        </div>
+    </div>

@@ -1,0 +1,66 @@
+<div class="container" >
+    <div class="listview lv-bordered lv-lg card">
+          <div class="lv-header-alt clearfix">
+                <h2 class="lvh-label">5. Create Your Categories</h2>
+            <div class="lv-actions actions">
+                    <span>Add and Delete</span>
+            </div>
+          </div>
+        <div ng-controller="TreeController">
+    <!--     {{data|json}} -->
+        <div class="col-sm-6 m-b-20 card"> 
+          <div class="card-header row" data-ng-init="mactrl.Load($event)">
+           <button ng-click="addChild(data)" class="btn btn-primary waves-effect pull-left">+ New Root Category</button>
+         </div>
+          <div class="row">
+            <ol>
+                <li ya-tree="child in data.children at ol" ng-class="{minimized:child.minimized}" item="{{child}}">
+                        <button class="toggle btn btn-default waves-effect" ng-click="toggleMinimized(child)" ng-switch on="child.minimized"><span ng-switch-when="true">&#x25B6;</span><span ng-switch-default>&#x25BC;</span>
+                        </button>
+                        <input ng-model="child.title" />
+                        <button ng-click="addChild(child)" class="btn btn-primary waves-effect">+</button>
+                        <button ng-click="remove(child)" class="btn btn-danger waves-effect">x</button>
+					<!-- Begin Ke 12/14/2016 DCS mapping -->
+                    <div class="pull-right">
+							<!-- Begin Vishruthi 12/14/2016 DCS mapping -->
+                            <select class="catselect" ng-change="" ng-model="child.DCS" placeholder="DCS">
+                                <option ng-repeat="DCS in DCSlist" value="{{DCS.DCS_id}}" ng-model="DCS_id">{{DCS.DCS_code}}</option>
+                            </select>
+							<!-- End Vishruthi 12/14/2016 DCS mapping -->
+                    </div>
+					<!-- End Ke 12/14/2016 DCS mapping -->
+                    <ol ng-class="{pregnant:child.children.length}"></ol>
+                </li>
+            </ol>
+        </div></div>
+        <div class="col-sm-6 m-b-20 card hidden-xs">
+          <div class="card-header row">
+           <button class="btn btn-default waves-effect pull-left">Preview</button>
+           </div>
+           <div class="row">
+            <ol>
+                <li ya-tree="child in data.children at ol" class="bg{{$depth%6}}" ng-class="{minimized:child.minimized}">
+                    <div class="preview">
+                        <input disabled value="{{child.title}}" /> <em>({{$depth}})</em>
+
+                    </div>
+                    <ol ng-class="{pregnant:child.children.length}"></ol>
+                </li>
+            </ol>
+        </div>
+      </div>   
+
+            <div class="lv-footer">
+				<!-- Begin Ke 12/14/2016 Categories Back Button -->
+                <a class="btn bgm-lightgreen waves-effect" href="?#/widgets/mapping-attributes"><div class="next-btn">Back</div></a>
+				<!-- End Ke 12/14/2016 Categories Back Button -->
+                <a class="btn bgm-lightblue waves-effect" href="?#/widgets/add-products-magento"><div class="next-btn" ng-click="SaveCategories()">Next</div></a>
+            </div>
+    </div> 
+    
+
+        <a href="mapping-attributes.html">mapping-attributes.html</a>
+    
+    </div> 
+   
+  </div>
